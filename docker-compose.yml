@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${DEVELOPMENT_PORT}:${DEVELOPMENT_PORT}"  # Mapear a porta do host para a porta do contêiner
+    environment:
+      NODE_ENV: development  # Modo de desenvolvimento
+      PORT: ${DEVELOPMENT_PORT}
