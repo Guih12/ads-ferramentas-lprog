@@ -42,7 +42,7 @@ class ProductController {
   }
 
   delete(request, response) {
-    let id = Number(req.params.id);
+    let id = Number(request.params.id);
 
     const product = products.find((p) => p.id === id);
 
