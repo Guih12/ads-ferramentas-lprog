@@ -2,10 +2,10 @@ const Postgres = require("./postgres");
 
 class Database {
   static create(databaseName) {
-   const databases = {
-        postgres: new Postgres()
-    }
-    return databases[databaseName]
+    const databases = {
+      postgres: new Postgres(),
+    };
+    return databases[databaseName];
   }
 }
 
