@@ -1,4 +1,5 @@
 const { products } = require("../../data/productsData");
+const Database = require('../../db/database')
 
 class ProductController {
   getAll(request, response) {
@@ -18,10 +19,17 @@ class ProductController {
     response.json(product);
   }
 
-  create(request, response) {
-    products.push({ id: 4, description: request.body.description });
+  async create(request, response) {
 
-    return response.json(products);
+    const database = Database.create("postgres")
+
+    await database.connect();
+
+    const result = await database.query("INSERT INTO products(description) VALUES($1) RETURNING *", [request.body.description])
+
+    await database.disconnect();
+
+    return response.json(result);
   }
 
   update(request, response) {

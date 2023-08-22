@@ -5,8 +5,8 @@ const users = [
   },
   {
     id: 2,
-    name: "Nadia Munin"
-  }
+    name: "Nadia Munin",
+  },
 ];
 
 module.exports = { users };

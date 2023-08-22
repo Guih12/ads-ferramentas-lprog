@@ -1,11 +1,18 @@
-version: '3'
+version: "3"
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - "${DEVELOPMENT_PORT}:${DEVELOPMENT_PORT}"  # Mapear a porta do host para a porta do contêiner
+      - "${DEVELOPMENT_PORT}:${DEVELOPMENT_PORT}"
     environment:
-      NODE_ENV: development  # Modo de desenvolvimento
-      PORT: ${DEVELOPMENT_PORT}
+      - NODE_ENV=development
+      - PORT=${DEVELOPMENT_PORT}
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db/${DB_NAME}
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
